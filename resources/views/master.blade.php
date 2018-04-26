@@ -31,15 +31,21 @@
         <header class="blog-header py-3">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-4 pt-1">
+                    @if(Auth::check())
+                        {{Auth::user()->name}}
+                    @endif
                 </div>
+
                 <div class="col-4 text-center">
                     <a class="blog-header-logo text-dark" href="#">Wacana</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                   @if(Auth::check())
-                    <a class="btn btn-sm btn-outline-secondary" href="{{url('/logout')}}">Sign out</a>
+                    <a class="btn btn-sm btn btn-outline-info" href="{{url('/write')}}">Write an Article</a>
+                    &nbsp;
+                    <a class="btn btn-sm btn btn-outline-danger" href="{{url('/logout')}}">Sign out</a>
                     @else
-                    <a class="btn btn-sm btn-outline-secondary" href="{{url('login')}}" data-target="#loginModal" data-toggle="modal">Sign in</a>
+                    <a class="btn btn-sm btn btn-outline-success" href="{{url('login')}}" data-target="#loginModal" data-toggle="modal">Sign in</a>
                   @endif
                 </div>
             </div>
@@ -47,12 +53,12 @@
         <!--menu-->
         <div class="nav-scroller py-1 mb-2" id="menu">
             <nav class="nav d-flex justify-content-between">
-                <a class="p-2 text-muted" href="#">Home</a>
-                <a class="p-2 text-muted" href="#">Technology</a>
-                <a class="p-2 text-muted" href="#">Entertainment</a>
-                <a class="p-2 text-muted" href="#">Lifestyle</a>
-                <a class="p-2 text-muted" href="#">Food</a>
-                <a class="p-2 text-muted" href="#">Sport</a>
+                <a class="p-2 text-muted" href="{{ url('/') }}">Home</a>
+                <a class="p-2 text-muted" href="{{ url('/technology') }}">Technology</a>
+                <a class="p-2 text-muted" href="{{ url('/entertainment') }}">Entertainment</a>
+                <a class="p-2 text-muted" href="{{ url('/lifestyle') }}">Lifestyle</a>
+                <a class="p-2 text-muted" href="{{ url('/food') }}">Food</a>
+                <a class="p-2 text-muted" href="{{ url('/sport') }}">Sport</a>
             </nav>
         </div>
         <!--headline-->
@@ -62,7 +68,7 @@
             @yield('content')
         </div>
 
-        @if ($errors->any())  
+        @if ($errors->any())
         <div class="modal fade bd-example-modal-sm" id="failedModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                 <div class ="modal-dialog modal-sm">
                     <div class="modal-content">
@@ -100,7 +106,7 @@
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus> 
+                                        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
                                         @if ($errors->has('name'))
                                         <span class="invalid-feedback">
                               <strong>{{ $errors->first('name') }}</strong>
@@ -110,7 +116,7 @@
                                 <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required> 
+                                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
                                         @if ($errors->has('email'))
                                         <span class="invalid-feedback">
                               <strong>{{ $errors->first('email') }}</strong>
@@ -120,7 +126,7 @@
                                 <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
                                     <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required> 
+                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                                         @if ($errors->has('password'))
                                         <span class="invalid-feedback">
                               <strong>{{ $errors->first('password') }}</strong>
@@ -167,15 +173,15 @@
                                         <div class="form-group row">
                                             <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
                                             <div class="col-md-6">
-                                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus> 
-                                                
+                                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
                                             <div class="col-md-6">
-                                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required> 
-                                                
+                                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -192,7 +198,7 @@
                                           <a class="btn btn-link" data-dismiss="modal" data-toggle="modal" href="#registerModal">
                                                 {{"Sign Up Here"}}
                                               </a>
-                                          </div>  
+                                          </div>
                                             <div class="col-md-8 offset-md-4">
                                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                                     {{ __('Forgot Your Password?') }}
@@ -213,6 +219,13 @@
 
             <!-- Optional JavaScript -->
             @yield('script')
+            @if(!empty(Session::get('error_code')) && Session::get('error_code') == 5)
+            <script>
+                $(function() {
+                $('#loginModal').modal('show');
+                });
+            </script>
+            @endif
             <!-- include libraries(jQuery, bootstrap) -->
 </body>
 

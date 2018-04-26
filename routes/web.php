@@ -9,31 +9,27 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 /*Route::get('/', function () {
-    return view('welcome');
+return view('welcome');
 });*/
 
 Auth::routes();
 
-Route::group(['middleware' => ['web', 'auth']], function(){
+Route::group(['middleware' => ['web', 'auth']], function () {
 
-	
+    Route::resource('/write', 'PostController');
 
-    Route::get('/logout', function(){
-		Auth::logout();
-		return redirect('/');
-	});
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect('/');
+    });
 });
 
-Route::resource('/write', 'PostController');
 Route::resource('/', 'HomeController');
 Route::resource('/technology', 'TechnologyController');
 Route::resource('/entertainment', 'EntertainmentController');
 Route::resource('/lifestyle', 'LifestyleController');
 Route::resource('/food', 'FoodController');
 Route::resource('/sport', 'SportController');
-
-
-

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
 use Illuminate\Http\Request;
+use App\Article;
 
-class HomeController extends Controller
+class TechnologyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,31 +14,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-        $headlines = Article::all()->sortByDesc('created_at')->first();
-        $content = $headlines->content;
+        /*$articles = Article::all()->where('category_id', '1');
+        dd($articles);*/
 
-        $dom = new \domdocument();
-        //libxml_use_internal_errors(true);
-        @$dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        return view('technology.technology');
 
-        $images = $dom->getElementsByTagName('img');
-
-        $separatedImg = $images->item(0)->attributes->getNamedItem("src")->value;
-
-        $imgs = array();
-        foreach ($images as $img) {
-            $imgs[] = $img;
-        }
-        foreach ($imgs as $img) {
-            $img->parentNode->removeChild($img);
-        }
-
-        $content = $dom->savehtml();
-
-        return view('main.main')->with(compact('headlines'))
-            ->with(compact('separatedImg'))
-            ->with(compact('content'));
     }
 
     /**
@@ -59,8 +39,7 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        $articles = Article::find($id);
-        dd($articles);
+        //
     }
 
     /**
@@ -71,7 +50,8 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $articles = Article::find($id);
+        return view('technology.read', compact('articles'));
     }
 
     /**

@@ -5,15 +5,15 @@
     <div class="alert alert-danger" role="alert">
         <ul>
             @foreach ($errors->all() as $error)
-                
+
                 <strong>
 					<i class="icon-remove"></i>
 					Oh snap!
 				</strong>
                 {{ $error }} <br>
-			
+
 			@endforeach
-        </ul> 
+        </ul>
     </div>
 @endif
 
@@ -23,7 +23,7 @@
          <div class="blog-post">
             <h2 class="blog-post-title">Write Article</h2>
             <hr>
-            <form method="post" action="/create" enctype="multipart/form-data">
+            <form method="post" action="/write" enctype="multipart/form-data">
                <div class="form-group">
                <input type="hidden" name="_token" value="{{csrf_token() }}">
                   <div class="form-group">
@@ -32,7 +32,7 @@
                         <option value="0">Choose...</option>
                         @foreach ($categories as $categ)
                         <option value="{{$categ->id}}">{{$categ->category}}</option>
-                        @endforeach 
+                        @endforeach
                      </select>
                   </div>
                   <div class="form-group">
@@ -45,9 +45,10 @@
                      <label for="exampleFormControlInput1">Content</label>
                      <textarea name="content" class="summernote" style="height:300px;" name="content"></textarea>
                   </div>
-                  
+
                   <br>
-                  <button type="submit" value="post">Submit</button>
+                  <button type="submit" class="btn btn-primary" value="post">Submit</button>
+                  <a class="btn btn-secondary" href="{{url('/')}}">Cancel</a>
                </div>
             </form>
          </div>
@@ -74,10 +75,10 @@
        },
        fontNames: ["Helvetica", "sans-serif", "Arial", "Arial Black", "Comic Sans MS", "Courier New"],
        fontNamesIgnoreCheck: ["Helvetica", "sans-serif", "Arial", "Arial Black", "Comic Sans MS", "Courier New"],
-    
+
       });
    });
-   
+
    $(document).ready(function() {
     $("#menu").hide();
    });

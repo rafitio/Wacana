@@ -1,21 +1,30 @@
 @extends('master')
 @section('headline')
+<div class="col-md-12 blog-main">
+<hr>
+<br>
+</div>
+<div class="col-md-12 blog-main">
+        <h3 class="pb-3 mb-4 border-bottom">
+            Technology
+        </h3>
+</div>
+
 <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-<h1 class="display-4 font-italic">{{$headlines->title}}</h1>
-<div class="row">
-    <div class="col col-lg-3">
-        <img src = "{!!$separatedImg!!}">
-    </div>
     <div class="col-md-6 px-0">
-        <p class="lead my-3" id="headlineContent">{!!$content!!}</p>
+
+        <h1 class="display-4 font-italic"></h1>
+        <p class="lead my-3" id="headlineContent"></p>
         <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
-    </div>
     </div>
 </div>
 @endsection
 
 @section('content')
-
+<div class="col-md-12 blog-main">
+<h4 class="pb-4 mb-4 border-bottom">
+            Feed
+        </h4>
 <div class="row mb-2">
                 <div class="col-md-6">
                   <div class="card flex-md-row mb-4 box-shadow h-md-250">
@@ -47,7 +56,7 @@
                 </div>
               </div>
 
-
+</div>
 @endsection
 
 @section('script')
