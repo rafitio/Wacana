@@ -14,7 +14,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /**content */
         $articles = Article::all();
+
+        /**end of content */
+
+        /**headline */
         $headlines = Article::all()->sortByDesc('created_at')->first();
         $content = $headlines->content;
 
@@ -33,12 +38,15 @@ class HomeController extends Controller
         foreach ($imgs as $img) {
             $img->parentNode->removeChild($img);
         }
-
         $content = $dom->savehtml();
+        /**end of headline */
+
+        //dd($articlesContent);
 
         return view('main.main')->with(compact('headlines'))
             ->with(compact('separatedImg'))
-            ->with(compact('content'));
+            ->with(compact('content'))
+            ->with(compact('articles'));
     }
 
     /**
